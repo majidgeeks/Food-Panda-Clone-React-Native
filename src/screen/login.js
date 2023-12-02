@@ -11,9 +11,11 @@ import {
 } from 'react-native';
 
 import Logo from '../assets/logo.png';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
     return(
       <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex:1}}>
@@ -28,8 +30,12 @@ const LoginScreen = () => {
                 <TextInput style={styles.textInput} placeholder="Username" />
                 <TextInput style={styles.textInput} placeholder="Password" />
                 <TouchableOpacity style={styles.button} >
-        <Text style={styles.buttonText}>LOG IN</Text>
+        <Text style={styles.buttonText} onPress={()=> navigation.navigate("Dashboard")}>LOG IN</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity>
+      <Text style={{fontSize:15, color:"white"}}>Dont Have Account? 
+       <Text style={{color:"blue", fontWeight:"bold"}} onPress={()=> navigation.navigate("SignUp")}>Sign Up</Text></Text></TouchableOpacity>
            
             </View>
             <View style = {styles.hungerTextView}>
