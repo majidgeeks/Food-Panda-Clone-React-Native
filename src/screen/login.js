@@ -7,147 +7,145 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import Logo from '../assets/logo.png';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+const LoginScreen = () => {
+  const navigation = useNavigation();
 
-const LoginScreen = ({navigation}) => {
-    return(
-      <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex:1}}>
-        <View style={styles.container}>
-
-            <View style = {styles.imgContainer}>
-                <Text style= {styles.foodPuppy}>FOOD PANDA</Text>
-            <Image style={styles.img} source={Logo} />
-            </View>
-
-            <View style = {styles.textInputView}>
-                <TextInput style={styles.textInput} placeholder="Username" />
-                <TextInput style={styles.textInput} placeholder="Password" />
-                <TouchableOpacity style={styles.button} >
-        <Text style={styles.buttonText} onPress={()=> navigation.navigate("Dashboard")}>LOG IN</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity>
-      <Text style={{fontSize:15, color:"white"}}>Dont Have Account? 
-       <Text style={{color:"blue", fontWeight:"bold"}} onPress={()=> navigation.navigate("SignUp")}>Sign Up</Text></Text></TouchableOpacity>
-           
-            </View>
-            <View style = {styles.hungerTextView}>
-            <Text style={styles.titleText}>Hey Hungers</Text>
-         <Text style={styles.titleDesc}>Grab Your Favourite Food!</Text>
-            </View>
-            
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flex: 1}}>
+      <View style={styles.container}>
+        <View style={styles.imgContainer}>
+          <Text style={styles.foodPuppy}>FOOD PANDA</Text>
+          <Image style={styles.img} source={Logo} />
         </View>
-        </KeyboardAvoidingView>
-    )
-}
+
+        <View style={styles.textInputView}>
+          <TextInput
+            style={styles.textInput}
+            placeholderTextColor="grey"
+            placeholder="Username"
+          />
+          <TextInput
+            style={styles.textInput}
+            placeholderTextColor="grey"
+            placeholder="Password"
+          />
+          <TouchableOpacity style={styles.button}>
+            <Text
+              style={styles.buttonText}
+              onPress={() =>
+                navigation.navigate('Home', {
+                  screen: 'Dashboard',
+                })
+              }>
+              LOG IN
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text style={{fontSize: 15, color: 'white'}}>
+              Dont Have Account?
+              <Text
+                style={{color: 'blue', fontWeight: 'bold'}}
+                onPress={() => navigation.navigate('SignUp')}>
+                Sign Up
+              </Text>
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.hungerTextView}>
+          <Text style={styles.titleText}>Hey Hungers</Text>
+          <Text style={styles.titleDesc}>Grab Your Favourite Food!</Text>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
+  );
+};
 
 const styles = StyleSheet.create({
-    //==============main view(container)=====================
-    container : {
-        backgroundColor: '#B1184E',
-        flex: 1,
-        justifyContent: "center",    
-    },
+  //==============main view(container)=====================
+  container: {
+    backgroundColor: '#B1184E',
+    flex: 1,
+    justifyContent: 'center',
+  },
 
-    //==============first child of main view==============================
-    imgContainer:{
-        
-        flex: 0.30,
-        justifyContent: 'center',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        
-    },
+  //==============first child of main view==============================
+  imgContainer: {
+    flex: 0.3,
+    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
 
-    foodPuppy: {
-       color: '#fff',
-       fontSize: 20
-       
-    
-    },
-    
-    img: {
-        
-        width: '40%',
-        height: '100%',
-        objectFit: 'contain',
-      },
+  foodPuppy: {
+    color: '#fff',
+    fontSize: 20,
+  },
 
-      // =================second child of main view=====================
-    textInputView:{
-         flex: 0.45,
-         justifyContent: 'space-evenly',
-         alignItems: 'center',
-         
-    }, 
-    //child of text input view
-    textInput:{
-     borderWidth: 2,  
-     width: '90%',
-     borderRadius:30,
-     backgroundColor:'#000'
-    },
+  img: {
+    width: '40%',
+    height: '100%',
+    objectFit: 'contain',
+  },
 
-    button: {
-        borderWidth:2,
-        alignItems: 'center',
-        padding: 10,
-        width:'25%',
-        backgroundColor:'white',
-        borderRadius: 30,
+  // =================second child of main view=====================
+  textInputView: {
+    flex: 0.45,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  //child of text input view
+  textInput: {
+    borderWidth: 2,
+    width: '90%',
+    borderRadius: 30,
+    backgroundColor: '#000',
+  },
 
-      },
+  button: {
+    borderWidth: 2,
+    alignItems: 'center',
+    padding: 10,
+    width: '25%',
+    backgroundColor: 'white',
+    borderRadius: 30,
+  },
 
-      buttonText:{
-       color: 'black',
+  buttonText: {
+    color: 'black',
     //    font: 'bold'
-      },
-    
-      //===================third child of main view=======================
-      hungerTextView:{
-         flex: 0.20,
-        //   backgroundColor: "black",
+  },
 
-      },
-      titleText: {
-            marginTop: 10,
-            color: '#fff',
-            textAlign: 'center',
-            fontSize: 20,
-            
-          },
-          titleDesc: {
-            marginTop: 10,
-            color: '#fff',
-            textAlign: 'center',
-            padding: 5,
-            fontSize: 15,
-            
-          },
-
-})
-
+  //===================third child of main view=======================
+  hungerTextView: {
+    flex: 0.2,
+    //   backgroundColor: "black",
+  },
+  titleText: {
+    marginTop: 10,
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  titleDesc: {
+    marginTop: 10,
+    color: '#fff',
+    textAlign: 'center',
+    padding: 5,
+    fontSize: 15,
+  },
+});
 
 export default LoginScreen;
-
-
-
-
-
-
-
-
-
-
-
-
 
 // export default function LoginScreen() {
 //   return (
