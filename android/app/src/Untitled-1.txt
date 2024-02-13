@@ -1,0 +1,2 @@
+
+adb -s 099643739D005981 reverse tcp:8081 tcp:8081

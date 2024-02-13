@@ -6,7 +6,10 @@ import {
   Image,
   FlatList,
   ScrollView,
+  TouchableOpacity
+
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {Icon} from 'react-native-paper';
 import {black} from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 import Carousel from 'react-native-reanimated-carousel';
@@ -173,44 +176,50 @@ const Data5 = [
 
 // DATA FOR SALAD
 const Data6 = [
-    {
-      id: 1,
-      title: 'Custard',
-      desc: 'Special Custard',
-      img: require('../assets/deserts/custard.jpeg'),
-      price: 650
-    },
-    {
-      id: 2,
-      title: 'Gajar Ka Halwa',
-      desc: 'Fresh Gajar Ka Halwa',
-      img: require('../assets/deserts/gajar-halwa.jpeg'),
-      price: 400
-    },
-    {
-      id: 3,
-      title: 'Kheer',
-      desc: 'Delicious Kheer',
-      img: require('../assets/deserts/kheer.jpeg'),
-      price: 700
-    },
-    {
-      id: 4,
-      title: 'Lab-E-Shirin',
-      desc: 'Special Lab-E-Shirin',
-      img: require('../assets/deserts/lab-e-shirin.jpeg'),
-      price: 1000
-    }
-  ];
-  
-
-
+  {
+    id: 1,
+    title: 'Custard',
+    desc: 'Special Custard',
+    img: require('../assets/deserts/custard.jpeg'),
+    price: 650,
+  },
+  {
+    id: 2,
+    title: 'Gajar Ka Halwa',
+    desc: 'Fresh Gajar Ka Halwa',
+    img: require('../assets/deserts/gajar-halwa.jpeg'),
+    price: 400,
+  },
+  {
+    id: 3,
+    title: 'Kheer',
+    desc: 'Delicious Kheer',
+    img: require('../assets/deserts/kheer.jpeg'),
+    price: 700,
+  },
+  {
+    id: 4,
+    title: 'Lab-E-Shirin',
+    desc: 'Special Lab-E-Shirin',
+    img: require('../assets/deserts/lab-e-shirin.jpeg'),
+    price: 1000,
+  },
+];
 
 function MenuSlider() {
   const width = Dimensions.get('window').width;
+  const navigation = useNavigation();
+  
+
   return (
-    <View style={{flex: 1, justifyContent:"center", alignItems:"center"}}>
-        <Text style={{fontSize:20}}>WELCOME</Text>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+
+<TouchableOpacity
+            onPress={()=>navigation.navigate("UpdatePassword")}
+                 >
+            <Text >UPDATE PASSWORD</Text>
+          </TouchableOpacity>
+      <Text style={{fontSize: 20}}>WELCOME</Text>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Carousel
           loop
@@ -431,7 +440,12 @@ function MenuSlider() {
                     alignItems: 'center',
                   }}>
                   <Image
-                    style={{objectFit: 'contain', width: 170, height: 150, marginHorizontal:5}}
+                    style={{
+                      objectFit: 'contain',
+                      width: 170,
+                      height: 150,
+                      marginHorizontal: 5,
+                    }}
                     source={item.img}
                   />
                   <Text style={{fontWeight: 'bold'}}>{item.title}</Text>
@@ -444,8 +458,6 @@ function MenuSlider() {
             )}
           />
         </View>
-
-
 
         {/* list for deserts */}
         <View style={{width: '100%', height: 270, gap: 5, marginTop: 5}}>
@@ -474,7 +486,12 @@ function MenuSlider() {
                     alignItems: 'center',
                   }}>
                   <Image
-                    style={{objectFit: 'contain', width: 170, height: 150, marginHorizontal:5}}
+                    style={{
+                      objectFit: 'contain',
+                      width: 170,
+                      height: 150,
+                      marginHorizontal: 5,
+                    }}
                     source={item.img}
                   />
                   <Text style={{fontWeight: 'bold'}}>{item.title}</Text>
@@ -487,10 +504,6 @@ function MenuSlider() {
             )}
           />
         </View>
-
-
-
-
       </ScrollView>
     </View>
   );

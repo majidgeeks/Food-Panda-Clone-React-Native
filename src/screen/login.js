@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Image,
@@ -8,14 +8,35 @@ import {
   Button,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
+
+import auth from '@react-native-firebase/auth';
 
 import Logo from '../assets/logo.png';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password , setPassword] = useState('');
+
+
+  const userSignIn = () => {
+
+       auth().signInWithEmailAndPassword(email, password)
+       .then((res)=> {
+        console.log("res",res)
+        Alert.alert("user loged in successfully")
+        navigation.navigate('Home', {
+          screen: 'Dashboard',
+        })
+       })
+       .catch((err)=> {
+         console.log("err", err)
+       })
+  }
 
   return (
     <KeyboardAvoidingView
@@ -28,23 +49,24 @@ const LoginScreen = () => {
         </View>
 
         <View style={styles.textInputView}>
-          <TextInput
+          <TextInput value={email} onChangeText={(txt)=> setEmail(txt)}
             style={styles.textInput}
             placeholderTextColor="grey"
             placeholder="Username"
           />
-          <TextInput
+
+          <TextInput value={password} onChangeText={(txt)=> setPassword(txt)}
             style={styles.textInput}
             placeholderTextColor="grey"
             placeholder="Password"
           />
+
           <TouchableOpacity style={styles.button}>
             <Text
               style={styles.buttonText}
-              onPress={() =>
-                navigation.navigate('Home', {
-                  screen: 'Dashboard',
-                })
+              onPress={() => {
+                userSignIn()  
+              }
               }>
               LOG IN
             </Text>
@@ -109,6 +131,7 @@ const styles = StyleSheet.create({
     width: '90%',
     borderRadius: 30,
     backgroundColor: '#000',
+    color: "#fff"
   },
 
   button: {
